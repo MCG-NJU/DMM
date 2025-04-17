@@ -1,0 +1,10 @@
+[
+    {
+        "model_name": "model0",
+        "model_path": "path/to/model0"
+    },
+    {
+        "model_name": "model1",
+        "model_path": "path/to/model1"
+    }
+]
