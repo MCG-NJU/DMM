@@ -149,6 +149,9 @@ def parse_args():
     parser.add_argument("--feat_loss_type", type=str, choices=["l2", "cos"])
     parser.add_argument("--feat_loss_weight", type=float)
 
+    # resume
+    parser.add_argument("--resume_from", type=str, help="The checkpoint path for resuming", default=None)
+
     args = parser.parse_args()
 
     return args
@@ -366,6 +369,12 @@ def main():
     logger.info(f"  Total optimization steps = {args.max_train_steps}")
     logger.info(f"  Mixed precision = {accelerator.mixed_precision}")
 
+    if args.resume_from:
+        logger.info(f"Resuming from checkpoint: {args.resume_from}")
+        accelerator.load_state(args.resume_from)
+        global_step = int(os.path.basename(args.resume_from).split("-")[1])
+        logger.info(f"Resume global_step to {global_step}")
+
     logger.info("Train!")
     for epoch in range(args.num_train_epochs):
         unet.train()
@@ -457,7 +466,7 @@ def main():
                 global_step += 1
 
                 # log && tensorboard
-                if (global_step % args.log_freq == 0):
+                if (global_step % args.log_interval == 0):
                     if accelerator.is_main_process:
                         accelerator.log({"train/lr": lr_scheduler.get_last_lr()[0]}, step=global_step)
                         accelerator.log({"train/loss": loss.detach().item(),
@@ -466,7 +475,6 @@ def main():
                         if args.use_feat_loss:
                             accelerator.log({"train/loss_feat": total_feat_loss.detach().item()}, step=global_step)
 
-                    ## write log
                     state_dict = {
                         "global_step": f"{global_step}",
                         "epoch": '[{}/{}]'.format(int(global_step / num_update_steps_per_epoch), args.num_train_epochs),
@@ -482,6 +490,12 @@ def main():
                         })
                         logger.debug(f"Feature Loss: {json.dumps(feat_loss_dict, indent=2)}")
                     logger.info(state_dict)
+
+                # save checkpoint
+                if (global_step % args.save_interval == 0):
+                    save_path = os.path.join(accelerator.project_dir, f"checkpoint-{global_step}")
+                    accelerator.save_state(save_path)
+                    logger.info(f"Saved state to {save_path}")
 
                 if global_step >= args.max_train_steps:
                     break

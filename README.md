@@ -8,8 +8,8 @@
 
 ## TODO
 - [x] Pre-training code.
-- [] Incremental training code.
-- [] Journeydb dataset code.
-- [] Inference code with Diffusers.
-- [] Online demo.
-- [] ComfyUI plugins.
+- [ ] Incremental training code.
+- [ ] Journeydb dataset code.
+- [ ] Inference code with Diffusers.
+- [ ] Online demo.
+- [ ] ComfyUI plugins.
