@@ -1,14 +1,22 @@
 from typing import List
+import random
 
 import torch
 from transformers import PretrainedConfig
 
 
 # Adapted from pipelines.StableDiffusionPipeline.encode_prompt
-def encode_prompt(prompt_batch: List[str], text_encoder, tokenizer, proportion_empty_prompts, is_train=True):
+def encode_prompt(prompt_batch: List[str], text_encoder, tokenizer, drop_rate):
+    captions = []
+    for caption in prompt_batch:
+        if random.random() < drop_rate:
+            captions.append("")
+        else:
+            captions.append(caption)
+
     with torch.no_grad():
         text_inputs = tokenizer(
-            prompt_batch,
+            captions,
             padding="max_length",
             max_length=tokenizer.model_max_length,
             truncation=True,
@@ -39,8 +47,5 @@ def import_model_class_from_model_name_or_path(pretrained_model_name_or_path: st
     elif model_class == "BertModel":
         from transformers import BertModel
         return BertModel
-    elif model_class == "ChineseCLIPTextModel": # 目前看来对于huiyu来说BertModel和ChineseCLIP 加载是一样的
-        from transformers import ChineseCLIPTextModel
-        return ChineseCLIPTextModel
     else:
         raise ValueError(f"{model_class} is not supported.")

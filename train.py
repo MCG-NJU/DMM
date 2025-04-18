@@ -298,15 +298,13 @@ def main():
 
     # Here, we compute not just the text embeddings but also the additional embeddings
     def compute_embeddings(prompt_batch,
-                           proportion_empty_prompts,
+                           drop_rate,
                            text_encoder,
                            teacher_text_encoder,
                            tokenizer,
-                           model_id,
-                           is_train=True):
-        prompt_embeds = encode_prompt(prompt_batch, text_encoder, tokenizer, proportion_empty_prompts, is_train)
-        prompt_embeds_teacher = encode_prompt(prompt_batch, teacher_text_encoder, tokenizer, proportion_empty_prompts,
-                                              is_train)
+                           model_id):
+        prompt_embeds = encode_prompt(prompt_batch, text_encoder, tokenizer, drop_rate)
+        prompt_embeds_teacher = encode_prompt(prompt_batch, teacher_text_encoder, tokenizer, drop_rate)
         model_ids = torch.LongTensor([model_id] * len(prompt_batch)).to(accelerator.device)
         out_dict = {
             "prompt_embeds": prompt_embeds,
@@ -317,7 +315,7 @@ def main():
 
     compute_embeddings_fn = functools.partial(
         compute_embeddings,
-        proportion_empty_prompts=0,
+        drop_rate=args.drop_rate,
         text_encoder=text_encoder,
         teacher_text_encoder=teacher_text_encoder,
         tokenizer=tokenizer,
