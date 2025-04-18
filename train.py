@@ -21,7 +21,7 @@ from diffusers import AutoencoderKL, DDPMScheduler
 from diffusers.optimization import get_scheduler
 from diffusers.utils.import_utils import is_xformers_available
 
-from modeling.unet import UNet2DConditionModel, DMMUNet2DConditionModel
+from modeling.dmm_unet import UNet2DConditionModel, DMMUNet2DConditionModel
 from data.mock import load_data
 from utils.log_utils import get_logger
 from utils.train_utils import (

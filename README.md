@@ -32,17 +32,23 @@ and initialize an Accelerate environment with:
 accelerate config
 ```
 
-An example of a training launch is in train.sh:
+An example of a training launch is in `train.sh`:
 
 ```bash
 sh train.sh
+```
+
+An example of inference script is in `inference.py`:
+
+```bash
+python inference.py
 ```
 
 ## TODO
 - [x] Pre-training code.
 - [ ] Model weight release.
 - [ ] Incremental training code.
-- [ ] Inference code with Diffusers.
+- [x] Inference code with Diffusers.
 - [ ] Journeydb dataset code.
 - [ ] Online demo.
 - [ ] ComfyUI plugins.
