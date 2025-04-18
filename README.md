@@ -18,6 +18,26 @@ we propose a score distillation based model merging paradigm **DMM**, compressin
 
 ![](assets/visualization.jpg)
 
+## Usage
+
+Install required packages with:
+
+```bash
+pip install -r requirements.txt
+```
+
+and initialize an Accelerate environment with:
+
+```bash
+accelerate config
+```
+
+An example of a training launch is in train.sh:
+
+```bash
+sh train.sh
+```
+
 ## TODO
 - [x] Pre-training code.
 - [ ] Model weight release.
