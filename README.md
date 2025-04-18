@@ -12,7 +12,7 @@ Official repository of our paper [Building a Versatile Image Generation Model vi
 
 ## Introduction
 
-we propose a score distillation based model merging paradigm **DMM**, compressing multiple models into a single versatile T2I model.
+We propose a score distillation based model merging paradigm **DMM**, compressing multiple models into a single versatile T2I model.
 
 ![](assets/method.jpg)
 
