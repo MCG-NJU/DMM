@@ -57,5 +57,18 @@ python inference.py
 - [ ] Incremental training code.
 - [x] Inference code with Diffusers.
 - [ ] Journeydb dataset code.
+- [ ] Evaluation code.
 - [x] Online demo.
 - [ ] ComfyUI plugins.
+
+
+## Reference
+
+```bibtex
+@article{song2025dmm,
+  title={DMM: Building a Versatile Image Generation Model via Distillation-Based Model Merging},
+  author={Song, Tianhui and Feng, Weixin and Wang, Shuai and Li, Xubin and Ge, Tiezheng and Zheng, Bo and Wang, Limin},
+  journal={arXiv preprint arXiv:2504.12364},
+  year={2025}
+}
+```
