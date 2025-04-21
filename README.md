@@ -49,6 +49,17 @@ python inference.py
 
 ![](assets/visualization.jpg)
 
+### Results
+
+![](assets/results.jpg)
+
+### Results combined with charactor LoRA
+
+![](assets/results-lora.jpg)
+
+### Results of interpolation between two styles
+
+![](assets/results-interp.jpg)
 
 
 ## TODO
