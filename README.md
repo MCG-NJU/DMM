@@ -53,7 +53,7 @@ python inference.py
 
 ![](assets/results.jpg)
 
-### Results combined with charactor LoRA
+### Results combined with character LoRA
 
 ![](assets/results-lora.jpg)
 
@@ -61,6 +61,9 @@ python inference.py
 
 ![](assets/results-interp.jpg)
 
+## ComfyUI Plugins
+
+We developed a ComfyUI native implementation, please refer to [this repo](https://github.com/songtianhui/ComfyUI-DMM), which is still in progress.
 
 ## TODO
 - [x] Pre-training code.
@@ -70,7 +73,7 @@ python inference.py
 - [ ] Journeydb dataset code.
 - [ ] Evaluation code.
 - [x] Online demo.
-- [ ] ComfyUI plugins.
+- [x] ComfyUI plugins.
 
 
 ## Reference
